@@ -16,5 +16,10 @@ Super Momonga
 
 # Usage
 
+    $ sbt run
+    $ curl -I http://127.0.0.1:12380
+    HTTP/1.1 200 OK
+
+
 # Panya-
 nya-n
