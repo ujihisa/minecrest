@@ -11,9 +11,11 @@ object Main {
 		println("Hello, world!")
 
 		val service = new Service[HttpRequest, HttpResponse] {
-			def apply(req: HttpRequest): Future[HttpResponse] =
-				Future.value(new DefaultHttpResponse(
+			def apply(req: HttpRequest): Future[HttpResponse] = {
+				println('receiving, req)
+				Future(new DefaultHttpResponse(
 					req.getProtocolVersion, HttpResponseStatus.OK))
+			}
 		}
 
 		val server = Http.serve(":12380", service)
