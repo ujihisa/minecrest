@@ -3,7 +3,8 @@ package com.github.ujihisa.minecrest
 import com.twitter.finagle.{Http, Service}
 import com.twitter.util.{Await, Future}
 import java.net.InetSocketAddress
-import org.jboss.netty.handler.codec.http._
+import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse, HttpResponseStatus,
+	DefaultHttpResponse}
 
 object Main {
 	def main(args: Array[String]) {
