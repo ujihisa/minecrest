@@ -10,6 +10,7 @@ GPL v3
 
 * Tatsuhiro Ujihisa
 * supermomonga
+* raa0121
 
 # Installation
 
