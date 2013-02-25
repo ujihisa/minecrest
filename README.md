@@ -32,5 +32,5 @@ Simply, request your server by GET or POST method. You can choose request filety
     // Online member with XML format
     curl http://yourbukkithost:12380/api/v1/users/online.xml
 
-# パニャー
+# panya-
 nya-n
