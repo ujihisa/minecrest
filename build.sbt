@@ -6,9 +6,12 @@ name := "minecrest"
 
 version := "1.0"
 
-resolvers += "Akka Repo" at "http://repo.akka.io/repository"
+//resolvers += "Akka Repo" at "http://repo.akka.io/repository"
+
+resolvers ++= Seq(
+	"spray repo" at "http://repo.spray.io",
+	"typesafe releases" at "http://repo.typesafe.com/typesafe/releases/")
 
 libraryDependencies ++= Seq(
-	"org.scalatra" %% "scalatra" % "2.2.0",
-	"org.scalatra" %% "scalatra-scalate" % "2.2.0",
-	"javax.servlet" % "servlet-api" % "2.5")
+	"com.typesafe.akka" % "akka-actor" % "2.0.4",
+	"io.spray" % "spray-can" % "1.0-M7")
