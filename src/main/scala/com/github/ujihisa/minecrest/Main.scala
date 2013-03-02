@@ -7,6 +7,7 @@ class HttpHandler extends Actor {
 	import spray.http._
 	import spray.http.HttpMethods.{GET}
 	import com.codahale.jerkson.Json
+	import spray.can.server.HttpServer
 
 	sealed trait Entity
 	case class Player(name: String, health: Int) extends Entity
@@ -23,6 +24,9 @@ class HttpHandler extends Actor {
 
 		case _: HttpRequest =>
 			sender ! HttpResponse(status = 404, entity = "Unknown resource!")
+
+		case HttpServer.Closed(_, reason) =>
+			println('closed, reason)
 
 		case e => println("must-not-happen", e)
 	}
