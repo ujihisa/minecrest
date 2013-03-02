@@ -21,6 +21,9 @@ class HttpHandler extends Actor {
 		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
 			sender ! jsonResponse(toJson(mockOnlinePlayers))
 
+		case _: HttpRequest =>
+			sender ! HttpResponse(status = 404, entity = "Unknown resource!")
+
 		case e => println("must-not-happen", e)
 	}
 
