@@ -6,9 +6,8 @@ name := "minecrest"
 
 version := "1.0"
 
-//resolvers += "Akka Repo" at "http://repo.akka.io/repository"
-
 resolvers ++= Seq(
+	//"Akka Repo" at "http://repo.akka.io/repository"
 	"spray repo" at "http://repo.spray.io",
 	"typesafe releases" at "http://repo.typesafe.com/typesafe/releases/",
 	"repo.codahale.com" at "http://repo.codahale.com")
