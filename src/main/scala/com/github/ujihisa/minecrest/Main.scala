@@ -91,7 +91,7 @@ class Main extends JavaPlugin with SprayCanHttpServerApp {
 	Thread.currentThread.setContextClassLoader(this.getClass().getClassLoader())
 	val system0 = ActorSystem("minecrest")//, config, classLoader)
 	val handler = system.actorOf(Props[HttpHandler])
-	newHttpServer(handler) ! Bind(interface = "localhost", port = 12380)
+	newHttpServer(handler) ! Bind(interface = "0.0.0.0", port = 12380)
 	Thread.currentThread().setContextClassLoader(previous)
 	override lazy val system = system0
 
