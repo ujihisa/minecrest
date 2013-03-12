@@ -12,20 +12,23 @@ class HttpHandler extends Actor {
 
 	sealed trait Entity
 	case class Player(name: String, health: Int) extends Entity
-	private val mockOnlinePlayers = List(
-		Player("ujm", 2),
-		Player("mozukusoba", 20))
 
 	def receive = {
 		case HttpRequest(GET, "/alarm", _, _, _) =>
 			sender ! HttpResponse(entity = "OK")
 			
 		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
-			//sender ! jsonResponse(mockOnlinePlayers)
 			sender ! jsonResponse(Bukkit.getOnlinePlayers.toList.map { p =>
 				Map[String, Any](
-					"name" -> p.getName,
-					"health" -> p.getHealth)
+					"name"           -> p.getName,
+					"displayName"    -> p.getDisplayName,
+					"playerListName" -> p.getPlayerListName,
+					"health"         -> p.getHealth,
+					"currentExp"     -> p.getExp,
+					"totalExp"       -> p.getTotalExperience,
+					"address"        -> p.getAddress,
+					"allowFlight"    -> p.getAllowFlight,
+        )
 			})
 
 		case _: HttpRequest =>
