@@ -21,15 +21,17 @@ class HttpHandler extends Actor {
 		case HttpRequest(GET, "/alarm", _, _, _) =>
 			sender ! HttpResponse(entity = "OK")
 			
-		case HttpRequest(GET, "/api/v1/server.json", _, _, _) =>
+			/*
+		case HttpRequest(GET, "/api/v1/server.json", _, _, _) => {
       val s = Bukkit.getServer
+
 			sender ! jsonResponse(
         Map[String, Map[String, Any]](
           "server" -> Map[String, Any](
             "name"       -> s.getName,
             "serverName" -> s.getServerName,
             "version"    -> s.getVersion,
-            "address"    -> "%s:%s" format (s.getIp, s.getPort),
+            "address"    -> ("%s:%s" format (s.getIp, s.getPort)),
             "ip"         -> s.getIp,
             "port"       -> s.getPort
             ),
@@ -39,6 +41,8 @@ class HttpHandler extends Actor {
             )
           )
         )
+		}
+			*/
 
 		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
 			sender ! jsonResponse(Bukkit.getOnlinePlayers.toList.map { p =>
