@@ -22,9 +22,9 @@ class HttpHandler extends Actor {
 			sender ! HttpResponse(entity = "OK")
 			
 		case HttpRequest(GET, "/api/v1/server.json", _, _, _) =>
-      s = Bukkit.getServer
+      val s = Bukkit.getServer
 			sender ! jsonResponse(
-        Map[String, Map](
+        Map[String, Map[String, Any]](
           "server" -> Map[String, Any](
             "name"       -> s.getName,
             "serverName" -> s.getServerName,
