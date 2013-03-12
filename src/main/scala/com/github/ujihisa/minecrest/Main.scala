@@ -8,6 +8,7 @@ class HttpHandler extends Actor {
 	import spray.http.HttpMethods.{GET}
 	import com.codahale.jerkson.Json
 	import spray.can.server.HttpServer
+	import org.bukkit.Bukkit
 
 	sealed trait Entity
 	case class Player(name: String, health: Int) extends Entity
@@ -21,7 +22,11 @@ class HttpHandler extends Actor {
 			
 		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
 			//sender ! jsonResponse(mockOnlinePlayers)
-			sender ! jsonResponse(org.bukkit.Bukkit.getOnlinePlayers.toList.map(_.getName))
+			sender ! jsonResponse(Bukkit.getOnlinePlayers.toList.map { p =>
+				Map[String, Any](
+					"name" -> p.getName,
+					"health" -> p.getHealth)
+			})
 
 		case _: HttpRequest =>
 			sender ! HttpResponse(status = 404, entity = "Unknown resource!")
