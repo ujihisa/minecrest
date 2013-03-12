@@ -29,7 +29,7 @@ class HttpHandler extends Actor {
             "name"       -> s.getName,
             "serverName" -> s.getServerName,
             "version"    -> s.getVersion,
-            "address"    -> s.getIp + ":" + s.getPort,
+            "address"    -> "%s:%s" format (s.getIp, s.getPort),
             "ip"         -> s.getIp,
             "port"       -> s.getPort
             ),
