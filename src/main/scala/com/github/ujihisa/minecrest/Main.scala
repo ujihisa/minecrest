@@ -17,6 +17,25 @@ class HttpHandler extends Actor {
 		case HttpRequest(GET, "/alarm", _, _, _) =>
 			sender ! HttpResponse(entity = "OK")
 			
+		case HttpRequest(GET, "/api/v1/server/server.json", _, _, _) =>
+      s = Bukkit.getServer
+			sender ! jsonResponse(
+        Map[String, Map](
+          "server" -> Map[String, Any](
+            "name"       -> s.getName,
+            "serverName" -> s.getServerName,
+            "version"    -> s.getVersion,
+            "address"    -> s.getIp + ":" + s.getPort,
+            "ip"         -> s.getIp,
+            "port"       -> s.getPort
+            ),
+          "bukkit" -> Map[String, Any](
+            "version" -> s.getBukkitVersion,
+            "plugins" -> List[String]("TestPlugin1", "TestPlugin2", "TestPlugin3")
+            )
+          )
+        )
+
 		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
 			sender ! jsonResponse(Bukkit.getOnlinePlayers.toList.map { p =>
 				Map[String, Any](
