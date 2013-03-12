@@ -50,7 +50,7 @@ class HttpHandler extends Actor {
 					"currentExp"     -> p.getExp,
 					"totalExp"       -> p.getTotalExperience,
 					"address"        -> p.getAddress,
-					"allowFlight"    -> p.getAllowFlight,
+					"allowFlight"    -> p.getAllowFlight
         )
 			})
 
