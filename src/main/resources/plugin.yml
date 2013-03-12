@@ -1,0 +1,6 @@
+name: minecrest
+main: com.github.ujihisa.minecrest.Main
+version: 1.0.0
+website: http://ujihisa.blogspot.com
+author: Tatsuhiro Ujihisa
+description: REST endpoint
