@@ -250,8 +250,9 @@ class HttpHandler extends Actor {
 		}
 			*/
 
-		case HttpRequest(GET, "/api/v1/users/online.json", _, _, _) =>
-			sender ! jsonResponse(Bukkit.getOnlinePlayers.toList.map { p =>
+		case HttpRequest(GET, "/api/v1/users/online.json", headers, _, _) => {
+			println(GET, "/api/v1/users/online.json", headers)
+			sender ! jsonResponse(headers.map { h => (h.name, h.value) }.toMap[String, String].get("callback"), Bukkit.getOnlinePlayers.toList.map { p =>
 				Map[String, Any](
 					"name"           -> p.getName,
 					"displayName"    -> p.getDisplayName,
@@ -263,6 +264,7 @@ class HttpHandler extends Actor {
 					"allowFlight"    -> p.getAllowFlight
         )
 			})
+		}
 
 		case _: HttpRequest =>
 			sender ! HttpResponse(status = 404, entity = "Unknown resource!")
@@ -274,8 +276,13 @@ class HttpHandler extends Actor {
 	}
 
 	// all methods below are mock
-	private def jsonResponse(x: Any): HttpResponse =
-		HttpResponse(entity = Json.generate(x))
+	private def jsonResponse(callback: Option[String], x: Any): HttpResponse = {
+		val y = callback match {
+			case Some(c) => "%s(%s)" format (c, Json.generate(x))
+			case _ => Json.generate(x)
+		}
+		HttpResponse(entity = Json.generate(y))
+	}
 }
 
 /*
