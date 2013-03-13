@@ -281,7 +281,7 @@ class HttpHandler extends Actor {
 			case Some(c) => "%s(%s)" format (c, Json.generate(x))
 			case _ => Json.generate(x)
 		}
-		HttpResponse(entity = Json.generate(y))
+		HttpResponse(entity = y)
 	}
 }
 
